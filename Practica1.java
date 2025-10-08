@@ -36,23 +36,31 @@ public class Practica1 {
         Set<Integer> verd_cuadrados = new HashSet<>();
         Set<Integer> verd_no_cuadrados = new HashSet<>();
 
+        verd_no_cuadrados.addAll(cuadrados);
+        verd_no_cuadrados.addAll(noCuadrados);
+
         for(int elemento : cuadrados){
             for(int elemento2 : noCuadrados){
                 if (elemento*elemento == elemento2){
                     verd_cuadrados.add(elemento);
                 }
-                else if(elemento2*elemento2 == elemento){
+                if(elemento2*elemento2 == elemento){
                     verd_cuadrados.add(elemento2);
                 }
             }
-            if(!verd_cuadrados.contains(elemento)){
-                verd_no_cuadrados.add(elemento);
-            }
         }
-        cuadrados.clear();
-        cuadrados.addAll(verd_cuadrados);
+
+        /*for (int elemento : verd_no_cuadrados){
+            if(verd_no_cuadrados.contains(elemento*elemento)||elemento!=1){
+                verd_cuadrados.add(elemento*elemento);
+            }
+        }*/
+
+        verd_no_cuadrados.removeAll(verd_cuadrados);
         noCuadrados.clear();
         noCuadrados.addAll(verd_no_cuadrados);
+        cuadrados.clear();
+        cuadrados.addAll(verd_cuadrados);
 
     }
 
