@@ -70,44 +70,38 @@ public class Practica1 {
 
     //EJERCICIO 3
     public static<T> Collection<Set<T>> divideInSets (Iterator<T> it) {
-        //TODO
         Collection<Set<T>> resultado = new ArrayList<>();
         List<T> elementos = new ArrayList<>();
         Set<T> conjunto = new HashSet<>();
-        boolean continuar = true;
 
+        while(it.hasNext()){
+            T e = it.next();
 
-        while(continuar){
-            if(it.hasNext()){
-                T elemento = it.next();
-                if(!conjunto.contains(elemento)){
-                    conjunto.add(elemento);
-                    it.remove();
+            if(conjunto.contains(e)){
+                elementos.add(e);
+            }
+            else{
+                conjunto.add(e);
+            }
+        }
+        if(conjunto.isEmpty()){
+            return  resultado;
+        }
+        resultado.add(conjunto);
+        while(!elementos.isEmpty()){
+            conjunto = new HashSet<>();
+            List<T> lista_tmp = new ArrayList<>();
+            for(T e : elementos){
+                if(conjunto.contains(e)){
+                    lista_tmp.add(e);
                 }
                 else{
-                    elementos.add(elemento);
+                    conjunto.add(e);
                 }
             }
-            if(!conjunto.isEmpty()){
-                resultado.add(conjunto);
-            }
-
+            elementos = lista_tmp;
             resultado.add(conjunto);
-            conjunto = new HashSet<>();
-
-            for(T e: elementos){
-                if(conjunto.contains(e)){
-
-                }
-            }
-            /*if(conjunto.contains(elemento)){
-                resultado.add(conjunto);
-                conjunto = new HashSet<>();
-            }*/
-
         }
-
-
         return resultado;
     }
 
